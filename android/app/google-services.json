@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1092967405162",
+    "project_id": "fl-calculadora-ia",
+    "storage_bucket": "fl-calculadora-ia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092967405162:android:69b454c109eb4d0111dc13",
+        "android_client_info": {
+          "package_name": "com.example.fl_calculadora_ia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUt2r3-WpOykxf9uVMnwvfgAY4dGkamhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
