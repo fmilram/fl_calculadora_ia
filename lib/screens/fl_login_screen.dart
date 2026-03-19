@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void dispose() {
@@ -19,13 +21,65 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _login() {
+  Future<void> _login() async {
     if (_formKey.currentState!.validate()) {
-      String email = _emailController.text;
-      String password = _passwordController.text;
+      try {
+        await _auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
 
-      print('Email: $email');
-      print('Password: $password');
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Login correcto')));
+      } on FirebaseAuthException catch (e) {
+        if (!mounted) return;
+
+        String mensaje = 'Error en login';
+
+        if (e.code == 'user-not-found') {
+          mensaje = 'Usuario no encontrado';
+        } else if (e.code == 'wrong-password') {
+          mensaje = 'Contraseña incorrecta';
+        }
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(mensaje)));
+      }
+    }
+  }
+
+  Future<void> _register() async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await _auth.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
+        );
+
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Usuario registrado correctamente')),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (!mounted) return;
+
+        String mensaje = 'Error en registro';
+
+        if (e.code == 'email-already-in-use') {
+          mensaje = 'El correo ya está en uso';
+        } else if (e.code == 'weak-password') {
+          mensaje = 'La contraseña es demasiado débil';
+        }
+
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(mensaje)));
+      }
     }
   }
 
@@ -76,9 +130,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
               const SizedBox(height: 24),
+
               ElevatedButton(
                 onPressed: _login,
                 child: const Text('Iniciar sesión'),
+              ),
+
+              const SizedBox(height: 12),
+
+              ElevatedButton(
+                onPressed: _register,
+                child: const Text('Registrarse'),
               ),
             ],
           ),
