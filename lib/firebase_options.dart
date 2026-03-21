@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     authDomain: 'fl-calculadora-ia.firebaseapp.com',
     storageBucket: 'fl-calculadora-ia.firebasestorage.app',
   );
+
 }
