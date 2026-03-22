@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ResultScreen extends StatelessWidget {
+  final String imagePath;
+
+  const ResultScreen({super.key, required this.imagePath});
 
   Future<void> _cerrarSesion(BuildContext context) async {
     bool confirmar =
@@ -37,19 +40,24 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
+      appBar: AppBar(title: const Text('Resultado')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Login correcto', style: TextStyle(fontSize: 18)),
+            const Text('Imagen capturada:', style: TextStyle(fontSize: 18)),
             const SizedBox(height: 20),
+
+            Image.file(File(imagePath)),
+
+            const SizedBox(height: 30),
 
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/camera');
+                Navigator.pop(context);
               },
-              child: const Text('Abrir cámara'),
+              child: const Text('Volver'),
             ),
 
             const SizedBox(height: 10),

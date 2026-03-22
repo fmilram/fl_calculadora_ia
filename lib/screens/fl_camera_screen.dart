@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'fl_result_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -43,8 +44,11 @@ class _CameraScreenState extends State<CameraScreen> {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Foto guardada en: ${image.path}')),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(imagePath: image.path),
+        ),
       );
     } catch (e) {
       print(e);
