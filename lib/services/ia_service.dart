@@ -20,7 +20,10 @@ class IAService {
     texto = texto.replaceAll('\n', '');
     texto = texto.replaceAll('x', '*');
     texto = texto.replaceAll('X', '*');
+    texto = texto.replaceAll('.', '*');
     texto = texto.replaceAll('÷', '/');
+    texto = texto.replaceAll('O', '0');
+    texto = texto.replaceAll('l', '1');
     texto = texto.replaceAll(RegExp(r'[^0-9+\-*/()]'), '');
 
     try {
