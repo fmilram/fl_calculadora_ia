@@ -216,6 +216,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_mlkit_commons:
+    dependency: transitive
+    description:
+      name: google_mlkit_commons
+      sha256: "3e69fea4211727732cc385104e675ad1e40b29f12edd492ee52fa108423a6124"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.11.1"
+  google_mlkit_text_recognition:
+    dependency: "direct main"
+    description:
+      name: google_mlkit_text_recognition
+      sha256: "10a8d1a64fa21efda89514f6df88bbb7885be3ae1bfb7a6d229132d802a20d22"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.1"
   http:
     dependency: transitive
     description:
@@ -280,6 +296,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
+  math_expressions:
+    dependency: "direct main"
+    description:
+      name: math_expressions
+      sha256: "2e1ceb974c2b1893c809a68c7005f1b63f7324db0add800a0e792b1ac8ff9f03"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   meta:
     dependency: transitive
     description:
@@ -296,6 +320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  petitparser:
+    dependency: transitive
+    description:
+      name: petitparser
+      sha256: "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.2"
   plugin_platform_interface:
     dependency: transitive
     description:

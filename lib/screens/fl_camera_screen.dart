@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'fl_result_screen.dart';
+import '../services/ia_service.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
@@ -42,12 +43,22 @@ class _CameraScreenState extends State<CameraScreen> {
 
       final image = await _controller!.takePicture();
 
+      final ia = IAService();
+
+      String texto = await ia.reconocerTexto(image.path);
+
+      String resultado = ia.resolverOperacion(texto);
+
       if (!mounted) return;
 
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ResultScreen(imagePath: image.path),
+          builder: (context) => ResultScreen(
+            imagePath: image.path,
+            operacion: texto,
+            resultado: resultado,
+          ),
         ),
       );
     } catch (e) {

@@ -4,8 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class ResultScreen extends StatelessWidget {
   final String imagePath;
+  final String operacion;
+  final String resultado;
 
-  const ResultScreen({super.key, required this.imagePath});
+  const ResultScreen({
+    super.key,
+    required this.imagePath,
+    required this.operacion,
+    required this.resultado,
+  });
 
   Future<void> _cerrarSesion(BuildContext context) async {
     bool confirmar =
@@ -43,30 +50,52 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Resultado')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Imagen capturada:', style: TextStyle(fontSize: 18)),
-            const SizedBox(height: 20),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Imagen capturada:', style: TextStyle(fontSize: 18)),
 
-            Image.file(File(imagePath)),
+                const SizedBox(height: 20),
 
-            const SizedBox(height: 30),
+                Image.file(File(imagePath), height: 250, fit: BoxFit.contain),
 
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Volver'),
+                const SizedBox(height: 20),
+
+                Text(
+                  'Operación: $operacion',
+                  style: const TextStyle(fontSize: 16),
+                ),
+
+                const SizedBox(height: 10),
+
+                Text(
+                  'Resultado: $resultado',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Volver'),
+                ),
+
+                const SizedBox(height: 10),
+
+                ElevatedButton(
+                  onPressed: () => _cerrarSesion(context),
+                  child: const Text('Cerrar sesión'),
+                ),
+              ],
             ),
-
-            const SizedBox(height: 10),
-
-            ElevatedButton(
-              onPressed: () => _cerrarSesion(context),
-              child: const Text('Cerrar sesión'),
-            ),
-          ],
+          ),
         ),
       ),
     );
