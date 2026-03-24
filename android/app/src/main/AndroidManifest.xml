@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-        android:label="fl_calculadora_ia"
+        android:label="MathCam"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
