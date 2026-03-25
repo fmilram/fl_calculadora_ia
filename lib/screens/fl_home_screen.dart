@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../themes/app_background.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,29 +37,45 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Login correcto', style: TextStyle(fontSize: 18)),
-            const SizedBox(height: 20),
+    return AppBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(title: const Text('Home')),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                '¡Bienvenido a MathCam!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              ),
 
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/camera');
-              },
-              child: const Text('Abrir cámara'),
-            ),
+              const SizedBox(height: 12),
 
-            const SizedBox(height: 10),
+              const Text(
+                'La app con la que podrás calcular el resultado de una operación con solo un click.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
 
-            ElevatedButton(
-              onPressed: () => _cerrarSesion(context),
-              child: const Text('Cerrar sesión'),
-            ),
-          ],
+              const SizedBox(height: 30),
+
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/camera');
+                },
+                child: const Text('Abrir cámara'),
+              ),
+
+              const SizedBox(height: 10),
+
+              ElevatedButton(
+                onPressed: () => _cerrarSesion(context),
+                child: const Text('Cerrar sesión'),
+              ),
+            ],
+          ),
         ),
       ),
     );

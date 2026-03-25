@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../themes/app_background.dart';
 
 class ResultScreen extends StatelessWidget {
   final String imagePath;
@@ -46,54 +47,71 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Resultado')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Imagen capturada:', style: TextStyle(fontSize: 18)),
-
-                const SizedBox(height: 20),
-
-                Image.file(File(imagePath), height: 250, fit: BoxFit.contain),
-
-                const SizedBox(height: 20),
-
-                Text(
-                  'Operación: $operacion',
-                  style: const TextStyle(fontSize: 16),
-                ),
-
-                const SizedBox(height: 10),
-
-                Text(
-                  'Resultado: $resultado',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+    return AppBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(title: const Text('Resultado')),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Imagen capturada:',
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.center,
                   ),
-                ),
 
-                const SizedBox(height: 30),
+                  const SizedBox(height: 20),
 
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Volver'),
-                ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.file(
+                      File(imagePath),
+                      height: 250,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
 
-                const SizedBox(height: 10),
+                  const SizedBox(height: 20),
 
-                ElevatedButton(
-                  onPressed: () => _cerrarSesion(context),
-                  child: const Text('Cerrar sesión'),
-                ),
-              ],
+                  Text(
+                    'Operación: $operacion',
+                    style: const TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  Text(
+                    'Resultado: $resultado',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Volver'),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  ElevatedButton(
+                    onPressed: () => _cerrarSesion(context),
+                    child: const Text('Cerrar sesión'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

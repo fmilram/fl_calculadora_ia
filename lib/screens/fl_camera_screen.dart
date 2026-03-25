@@ -82,9 +82,11 @@ class _CameraScreenState extends State<CameraScreen> {
                 }
               },
             ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: _takePicture,
-        child: const Icon(Icons.camera),
+        backgroundColor: const Color(0xFF0043FF),
+        child: const Icon(Icons.camera, color: Colors.white),
       ),
     );
   }
